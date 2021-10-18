@@ -10,12 +10,11 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
  * req {provider, timestamp, type}
  * */
 export async function main(event){
-	const data = JSON.parse(event.body);
-
-	const {provider, timestamp, type} = data;
+	const formData = decodeURIComponent(event.body);
+	const data = JSON.parse(formData);
 
 	try{
-		const value = data.timestamp+data.token;
+		const value = data.timestamp + data.token;
 
 		const hash = crypto.createHmac('sha256', process.env.MAILGUN_API_KEY).update(value).digest('hex');
 
@@ -29,10 +28,8 @@ export async function main(event){
 				TableName: process.env.tableName,
 
 				Item: {
-					mailId: uuid.v1(),
-					provider: provider,
-					timestamp: timestamp,
-					type: type,
+					id: uuid.v1(),
+					webhooks: JSON.stringify(data),
 					createdAt: Date.now()
 				},
 			};
@@ -42,7 +39,7 @@ export async function main(event){
 
 				await sns.publish({
 					TopicArn: process.env.topicArn,
-					Message: JSON.stringify(process.env.SNS_MSSG),
+					Message: JSON.stringify({provider: "mailgun", timestamp: data.timestamp, type: data.event}),
 					MessageStructure: "string",
 				}).promise();
 

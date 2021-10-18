@@ -11,7 +11,7 @@ export default class MyStack extends sst.Stack {
 		const table = new sst.Table(this, "MailEvent", {
 			fields,
 
-			primaryIndex: {partitionKey: "provider", sortKey: "timestamp"}
+			primaryIndex: {partitionKey: "webhooks", sortKey: "createdAt"}
 		});
 
 		//sns setup

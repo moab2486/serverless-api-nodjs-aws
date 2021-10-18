@@ -4,7 +4,8 @@ var Mailgun = require('mailgun-js')
  * req {to, subject, text}
  * */
 export async function main(event){
-	const data = JSON.parse(event.body)
+	const formData = decodeURIComponent(event.body);
+	const data = JSON.parse(formData);
 
 	const {to, subject, text} = data;
 

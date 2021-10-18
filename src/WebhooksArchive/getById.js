@@ -6,11 +6,14 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
  * req {id}
  * */
 export async function main(event){
+	const formData = decodeURIComponent(event.pathParameters);
+	const data = JSON.parse(formData);
+
 	const params = {
 		TableName: process.env.tableName,
 
 		key: {
-			type: event.pathParameters.id,
+			type: data.id,
 		},
 	};
 
