@@ -9,8 +9,8 @@
 ## Installing 
 
 - clone the repo
-- run 'npm install' to install dependancies
-- run 'cp .env.example .env' 
+- run `npm install` to install dependancies
+- run `cp .env.example .env`
 - edit .env file with appropriate data
 
 
@@ -40,4 +40,4 @@ Runs your tests using Jest. Takes all the [Jest CLI options](https://jestjs.io/d
 
 ## `Webhooks`
 
-To track event and ensure it from mailgun 'apiEndpoint+/mail-event'
+To track event and ensure it from mailgun `apiEndpoint+/mail-event`
