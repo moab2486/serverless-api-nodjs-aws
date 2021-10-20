@@ -48,17 +48,11 @@ export async function main(event){
 					message: "successfully created",
 					body: JSON.stringify(results.Items),
 				};
-			} catch {
-				return{
-					statusCode: 400,
-					message: 'Bad request'
-				}
+			} catch(err) {
+				return err;
 			}
 		}
-	} catch {
-		return{
-			statusCode: 400,
-			message: 'Bad request'
-		}
+	} catch(err) {
+		return err;
 	}
 }

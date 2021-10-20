@@ -25,10 +25,7 @@ export async function main(event){
 			message: "succesfully completed",
 			body: JSON.stringify(results.Items),
 		};
-	} catch {
-		return{
-			statusCode: 400,
-			message: 'Bad request'
-		}
+	} catch(err) {
+		return err;
 	}
 }

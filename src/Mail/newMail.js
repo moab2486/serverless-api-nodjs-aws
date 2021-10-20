@@ -6,6 +6,7 @@ var Mailgun = require('mailgun-js')
 export async function main(event){
 	const formData = decodeURIComponent(event.body);
 	const data = JSON.parse(formData);
+	return data;
 
 	const {to, subject, text} = data;
 
@@ -33,10 +34,7 @@ export async function main(event){
 				}
 			}
 		});
-	} catch {
-		return{
-			statusCode: 400,
-			message: 'Bad request'
-		}
+	} catch(err) {
+		return err;
 	}
 }
